@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import com.moises.kotlin_retrofit.adapters.MyItemRecyclerViewAdapter
 import com.moises.kotlin_retrofit.R
 
@@ -16,6 +17,11 @@ import com.moises.kotlin_retrofit.models.Country
 import com.moises.kotlin_retrofit.presenters.CountryListPresenter
 import com.moises.kotlin_retrofit.presenters.CountryListPresenterImpl
 import com.moises.kotlin_retrofit.view.CountryListView
+import kotlinx.android.synthetic.main.fragment_item_list.*
+import android.widget.AbsListView.CHOICE_MODE_SINGLE
+import android.widget.ArrayAdapter
+
+
 
 
 /**
@@ -29,15 +35,27 @@ import com.moises.kotlin_retrofit.view.CountryListView
  * Mandatory empty constructor for the fragment manager to instantiate the
  * fragment (e.g. upon screen orientation changes).
  */
-class CountryListFragment : Fragment(),CountryListView {
+class CountryListFragment : Fragment(), CountryListView {
+
+    override fun getEditTextCountry(): EditText {
+        return mEditTextCountry
+    }
+
+
+    override fun setCountries(countries: List<Country>) {
+
+        val numbers: List<Country> = countries
+        mRecyclerViewCounties.layoutManager = GridLayoutManager(context, 1)
+        mRecyclerViewCounties!!.adapter = MyItemRecyclerViewAdapter(numbers, mListener)
+    }
+
     override fun getContextFragment(): Context {
         return context
     }
 
     private var mColumnCount = 1
     private var mListener: OnListFragmentInteractionListener? = null
-     var mPresenter: CountryListPresenter? = null
-
+    var mPresenter: CountryListPresenter? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,30 +64,24 @@ class CountryListFragment : Fragment(),CountryListView {
         if (arguments != null) {
             mColumnCount = arguments.getInt(ARG_COLUMN_COUNT)
         }
+
     }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        mButtonSearch.setOnClickListener {
+            mPresenter = CountryListPresenterImpl(this)
+            mPresenter!!.getCountriesByName()
+        }
+
+    }
+
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+
         val view = inflater!!.inflate(R.layout.fragment_item_list, container, false)
 
-        mPresenter=CountryListPresenterImpl(this)
-        mPresenter!!.getCountriesByName()
-        // Set the adapter
-        if (view is RecyclerView) {
-            val context = view.getContext()
-            val recyclerView = view
-            if (mColumnCount <= 1) {
-                recyclerView.layoutManager = LinearLayoutManager(context)
-            } else {
-                recyclerView.layoutManager = GridLayoutManager(context, mColumnCount)
-            }
-
-            val country= Country("mexico")
-            val numbers: MutableList<Country> = mutableListOf(country,country)
-
-            numbers.add(Country("united"))
-            recyclerView.adapter = MyItemRecyclerViewAdapter(numbers!!, mListener)
-        }
         return view
     }
 

@@ -30,6 +30,8 @@ class CountryListPresenterImpl(view: CountryListView) : BasePresenterImpl(view.g
         else
             return
 
+        val query=mView.getEditTextCountry().text.toString()
+
         val subscriber = object : Subscriber<List<Country>>() {
             override fun onCompleted() {
 
@@ -42,12 +44,12 @@ class CountryListPresenterImpl(view: CountryListView) : BasePresenterImpl(view.g
 
             override fun onNext(countries: List<Country>) {
 
-
+                mView.setCountries(countries)
                 hideProgress()
 
             }
         }
 
-        mCountriesInteractor.getCountriesByName(subscriber,"united")
+        mCountriesInteractor.getCountriesByName(subscriber,query)
     }
 }
