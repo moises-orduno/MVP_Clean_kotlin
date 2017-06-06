@@ -28,7 +28,7 @@ class Country(name:String) {
     private var callingCodes: List<String>? = null
     @SerializedName("capital")
     @Expose
-    private var capital: String? = null
+    var capital: String? = null
     @SerializedName("altSpellings")
     @Expose
     private var altSpellings: List<String>? = null

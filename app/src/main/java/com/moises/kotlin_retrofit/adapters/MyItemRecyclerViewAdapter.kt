@@ -25,7 +25,8 @@ class MyItemRecyclerViewAdapter(private val mCountries: List<Country>, private v
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.mCountry = mCountries[position]
-        holder.mView.mTextViewId.setText(holder.mCountry!!.name)
+        holder.mView.mTextViewCountry.setText(holder.mCountry!!.name)
+        holder.mView.mTextViewCapital.setText(holder.mCountry!!.capital)
         //        holder.mContentView.setText(mCountries.get(position).content);
 
         holder.mView.setOnClickListener {

@@ -5,7 +5,6 @@
       <module fileurl="file://$PROJECT_DIR$/Kotlin_retrofit.iml" filepath="$PROJECT_DIR$/Kotlin_retrofit.iml" />
       <module fileurl="file://$PROJECT_DIR$/MVP_Clean_kotlin.iml" filepath="$PROJECT_DIR$/MVP_Clean_kotlin.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
 </project>
