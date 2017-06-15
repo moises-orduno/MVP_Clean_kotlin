@@ -20,6 +20,9 @@
         android:layout_height="wrap_content" />
 
     <android.support.v7.widget.RecyclerView
+        android:focusable="true"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         android:id="@+id/mRecyclerViewCounties"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -45,7 +45,7 @@ class CountryListFragment : Fragment(), CountryListView {
     override fun setCountries(countries: List<Country>) {
 
         val numbers: List<Country> = countries
-        mRecyclerViewCounties.layoutManager = GridLayoutManager(context, 1)
+        mRecyclerViewCounties.layoutManager = GridLayoutManager(context, 1) as RecyclerView.LayoutManager?
         mRecyclerViewCounties!!.adapter = MyItemRecyclerViewAdapter(numbers, mListener)
     }
 

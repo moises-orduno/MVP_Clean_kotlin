@@ -20,10 +20,11 @@ class CountriesInteractorImpl : CountriesInteractor {
         mCountryRepository.getCountriesByName(name)
 
 //
-                .flatMap(Func1<List<Country>, Observable<Country>> { programmers -> Observable.from<Country>(programmers) }).map(Func1<Country, Country> { programmer ->
-            val newProgrammer1 = Country("name")
-            newProgrammer1
-        }).toList().subscribeOn(Schedulers.newThread())
+//                .flatMap(Func1<List<Country>, Observable<Country>> { programmers -> Observable.from<Country>(programmers) }).map(Func1<Country, Country> { programmer ->
+//            val newProgrammer1 = Country("name")
+//            newProgrammer1
+//        }).toList()
+                .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber)
     }

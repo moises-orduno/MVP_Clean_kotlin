@@ -1,4 +1,4 @@
-package com.moises.kotlin_retrofit
+package com.moises.kotlin_retrofit.utils
 
 /**
  * Created by mou on 04/06/17.

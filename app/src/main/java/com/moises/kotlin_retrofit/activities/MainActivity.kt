@@ -1,4 +1,4 @@
-package com.moises.kotlin_retrofit
+package com.moises.kotlin_retrofit.activities
 
 import android.content.Context
 import android.os.Bundle
@@ -6,15 +6,17 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
+import com.moises.kotlin_retrofit.R
 import com.moises.kotlin_retrofit.fragments.CountryListFragment
 import com.moises.kotlin_retrofit.models.Country
 import com.moises.kotlin_retrofit.presenters.MainActivityPresenter
 import com.moises.kotlin_retrofit.view.MainActivityView
 
-class MainActivity : AppCompatActivity(),MainActivityView, CountryListFragment.OnListFragmentInteractionListener {
+class MainActivity : AppCompatActivity(), MainActivityView, CountryListFragment.OnListFragmentInteractionListener {
 
     override fun onListFragmentInteraction(country: Country) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        Toast.makeText(this,country.name,1).show()
     }
 
     override fun getContext(): Context {

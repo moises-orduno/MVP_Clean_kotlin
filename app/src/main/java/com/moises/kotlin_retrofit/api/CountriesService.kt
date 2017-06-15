@@ -1,11 +1,9 @@
 package com.moises.kotlin_retrofit.api
 
-import com.moises.kotlin_retrofit.Constants
 import com.moises.kotlin_retrofit.models.Country
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Path
 import rx.Observable
 
 /**

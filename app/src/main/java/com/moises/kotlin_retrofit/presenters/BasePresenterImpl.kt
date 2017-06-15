@@ -2,7 +2,6 @@ package com.moises.kotlin_retrofit.presenters
 
 import android.app.ProgressDialog
 import android.content.Context
-import com.moises.kotlin_retrofit.MainActivity
 
 /**
  * Created by mou on 31/05/17.
