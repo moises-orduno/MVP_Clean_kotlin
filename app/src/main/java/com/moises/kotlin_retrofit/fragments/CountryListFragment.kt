@@ -37,7 +37,7 @@ import android.net.Uri
  */
 class CountryListFragment : Fragment(), CountryListView, MyItemRecyclerViewAdapter.OnListFragmentInteractionListener {
     override fun onListFragmentInteraction(country: Country) {
-        val gmmIntentUri = Uri.parse("geo:${country.latlng!!.get(0)},${country.latlng!!.get(1)}")
+        val gmmIntentUri = Uri.parse("geo:${country.latlng!!.get(0)},${country.latlng!!.get(1)}?z=5")
         val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
         mapIntent.`package` = "com.google.android.apps.maps"
         if (mapIntent.resolveActivity(context!!.getPackageManager()) != null) {
