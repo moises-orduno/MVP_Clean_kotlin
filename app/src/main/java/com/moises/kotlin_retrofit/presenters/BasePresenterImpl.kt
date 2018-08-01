@@ -2,13 +2,14 @@ package com.moises.kotlin_retrofit.presenters
 
 import android.app.ProgressDialog
 import android.content.Context
+import android.widget.Toast
 
 /**
  * Created by mou on 31/05/17.
  */
 open class BasePresenterImpl(context: Context) : BasePresenter {
     override fun showError(error: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+       Toast.makeText(mContext,error,Toast.LENGTH_LONG).show()
     }
 
     private var dialog: ProgressDialog

@@ -13,11 +13,7 @@ import com.moises.kotlin_retrofit.models.Country
 import com.moises.kotlin_retrofit.presenters.MainActivityPresenter
 import com.moises.kotlin_retrofit.view.MainActivityView
 
-class MainActivity : AppCompatActivity(), MainActivityView, CountryListFragment.OnListFragmentInteractionListener {
-
-    override fun onListFragmentInteraction(country: Country) {
-        Toast.makeText(this,country.name,1).show()
-    }
+class MainActivity : AppCompatActivity(), MainActivityView {
 
     override fun getContext(): Context {
         return this

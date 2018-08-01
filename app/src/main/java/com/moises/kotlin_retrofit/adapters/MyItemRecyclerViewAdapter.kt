@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.moises.kotlin_retrofit.R
 
-import com.moises.kotlin_retrofit.fragments.CountryListFragment.OnListFragmentInteractionListener
 import com.moises.kotlin_retrofit.models.Country
 import kotlinx.android.synthetic.main.fragment_item.view.*
 
@@ -43,8 +42,9 @@ class MyItemRecyclerViewAdapter(private val mCountries: List<Country>, private v
         var mCountry: Country? = null
 
 
-//        override fun toString(): String {
-//            return super.toString() + " '" + mTe.text + "'"
-//        }
+    }
+
+    interface OnListFragmentInteractionListener {
+        fun onListFragmentInteraction(country: Country)
     }
 }

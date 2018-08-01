@@ -9,7 +9,7 @@ import com.moises.kotlin_retrofit.models.Country
  */
 interface CountryListView {
 
-    fun  getContextFragment(): Context
+    fun  getContextFragment(): Context?
 
     fun setCountries(countries : List<Country> )
 

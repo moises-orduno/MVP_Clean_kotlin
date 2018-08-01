@@ -11,26 +11,24 @@ import rx.Subscriber
 /**
  * Created by mou on 04/06/17.
  */
-class CountryListPresenterImpl(view: CountryListView) : BasePresenterImpl(view.getContextFragment()), CountryListPresenter{
+class CountryListPresenterImpl(view: CountryListView) : BasePresenterImpl(view.getContextFragment()!!), CountryListPresenter {
 
-    private var  mView: CountryListView
-    var mCountriesInteractor:CountriesInteractor
+    private var mView: CountryListView
+    var mCountriesInteractor: CountriesInteractor
 
 
-    init{
-        mView=view;
-        mContext=view.getContextFragment()
+    init {
+        mView = view;
+        mContext = view.getContextFragment()!!
         mCountriesInteractor = CountriesInteractorImpl()
     }
 
 
     override fun getCountriesByName() {
-        if (mView != null)
-            showProgress()
-        else
-            return
 
-        val query=mView.getEditTextCountry().text.toString()
+        showProgress()
+
+        val query = mView.getEditTextCountry().text.toString()
 
         val subscriber = object : Subscriber<List<Country>>() {
             override fun onCompleted() {
@@ -50,6 +48,6 @@ class CountryListPresenterImpl(view: CountryListView) : BasePresenterImpl(view.g
             }
         }
 
-        mCountriesInteractor.getCountriesByName(subscriber,query)
+        mCountriesInteractor.getCountriesByName(subscriber, query)
     }
 }

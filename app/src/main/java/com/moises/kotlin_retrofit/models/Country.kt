@@ -54,7 +54,7 @@ class Country(name:String) : Parcelable {
 
     @SerializedName("latlng")
     @Expose
-    private var latlng: List<Int>? = null
+    public var latlng: List<Int>? = null
 
     @SerializedName("demonym")
     @Expose

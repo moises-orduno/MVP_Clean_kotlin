@@ -20,8 +20,8 @@ import com.moises.kotlin_retrofit.view.CountryListView
 import kotlinx.android.synthetic.main.fragment_item_list.*
 import android.widget.AbsListView.CHOICE_MODE_SINGLE
 import android.widget.ArrayAdapter
-
-
+import android.content.Intent
+import android.net.Uri
 
 
 /**
@@ -35,7 +35,14 @@ import android.widget.ArrayAdapter
  * Mandatory empty constructor for the fragment manager to instantiate the
  * fragment (e.g. upon screen orientation changes).
  */
-class CountryListFragment : Fragment(), CountryListView {
+class CountryListFragment : Fragment(), CountryListView, MyItemRecyclerViewAdapter.OnListFragmentInteractionListener {
+    override fun onListFragmentInteraction(country: Country) {
+        val gmmIntentUri = Uri.parse("geo:${country.latlng!!.get(0)},${country.latlng!!.get(1)}")
+        val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+        mapIntent.`package` = "com.google.android.apps.maps"
+        if (mapIntent.resolveActivity(context!!.getPackageManager()) != null) {
+            startActivity(mapIntent)
+        }    }
 
     override fun getEditTextCountry(): EditText {
         return mEditTextCountry
@@ -46,15 +53,14 @@ class CountryListFragment : Fragment(), CountryListView {
 
         val numbers: List<Country> = countries
         mRecyclerViewCounties.layoutManager = GridLayoutManager(context, 1) as RecyclerView.LayoutManager?
-        mRecyclerViewCounties!!.adapter = MyItemRecyclerViewAdapter(numbers, mListener)
+        mRecyclerViewCounties!!.adapter = MyItemRecyclerViewAdapter(numbers, this)
     }
 
-    override fun getContextFragment(): Context {
+    override fun getContextFragment(): Context? {
         return context
     }
 
     private var mColumnCount = 1
-    private var mListener: OnListFragmentInteractionListener? = null
     var mPresenter: CountryListPresenter? = null
 
 
@@ -62,7 +68,7 @@ class CountryListFragment : Fragment(), CountryListView {
         super.onCreate(savedInstanceState)
 
         if (arguments != null) {
-            mColumnCount = arguments.getInt(ARG_COLUMN_COUNT)
+            mColumnCount = arguments!!.getInt(ARG_COLUMN_COUNT)
         }
 
     }
@@ -77,41 +83,13 @@ class CountryListFragment : Fragment(), CountryListView {
     }
 
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val view = inflater!!.inflate(R.layout.fragment_item_list, container, false)
+        val view = inflater.inflate(R.layout.fragment_item_list, container, false)
 
         return view
     }
 
-
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-        if (context is OnListFragmentInteractionListener) {
-            mListener = context as OnListFragmentInteractionListener?
-        } else {
-            throw RuntimeException(context!!.toString() + " must implement OnListFragmentInteractionListener")
-        }
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        mListener = null
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments](http://developer.android.com/training/basics/fragments/communicating.html) for more information.
-     */
-    interface OnListFragmentInteractionListener {
-        fun onListFragmentInteraction(country: Country)
-    }
 
     companion object {
 
